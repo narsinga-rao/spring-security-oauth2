@@ -29,7 +29,7 @@ public class SecurityConfig {
                 .csrf(CsrfConfigurer::disable)
                 .oauth2ResourceServer(httpSecurityOAuth2ResourceServerConfigurer ->
                         httpSecurityOAuth2ResourceServerConfigurer.jwt(jwtConfigurer ->
-                                jwtConfigurer.jwtAuthenticationConverter(new KeycloakJwtAuthenticationConverter())));
+                                jwtConfigurer.jwtAuthenticationConverter(new JwtAuthenticationConverter())));
         return httpSecurity.build();
 
     }
