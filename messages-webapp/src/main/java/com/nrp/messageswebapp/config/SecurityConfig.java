@@ -31,7 +31,9 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 ).cors(CorsConfigurer::disable)
                 .csrf(CsrfConfigurer::disable)
-                .oauth2Login(Customizer.withDefaults())
+                .oauth2Login(httpSecurityOAuth2LoginConfigurer ->
+                        httpSecurityOAuth2LoginConfigurer.userInfoEndpoint(userInfoEndpointConfig ->
+                                userInfoEndpointConfig.userAuthoritiesMapper(new KeycloakAuthoritiesMapper())))
                 .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.clearAuthentication(true)
                         .invalidateHttpSession(true)
                         .logoutSuccessHandler(oidcLogoutSuccessHandler()));
